@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primer Proyecto de Robótica</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <section id="portada">
+        <h3>INSTITUTO DE ENSEÑANZA SUPERIOR Nº 6023</h3>
+        <h3>“DR. ALFREDO LOUTAIF”</h3>
+        <h3>TECNICATURA SUPERIOR EN ANÁLISIS DE SISTEMAS Y DESARROLLO DE SOFTWARE</h3>
+
+        <h2>ROBÓTICA Y AUTOMATIZACIÓN</h2>
+
+        <img src="Imágenes\logo2.jpeg" alt="Portada" width="300" height="600"><br><br>
+
+        <h3>Profesor: José Mauro Emanuel Cerezo</h3>
+        <h3>Alumna: Carina Abigail Ledesma</h3>
+
+        <br>
+
+        <h2>2025</h2>
+    
+    
+    </section>
+
+    <section id="contenido">
+        <h2>Fundamentación:</h2>
+        <p> En la era de la digitalización, el concepto de Internet de las cosas (IoT) ha ganado relevancia y notoriedad, permitiendo la interconexión de dispositivos cotidianos a Internet. 
+            Este proyecto se enfoca en el control remoto de un foco mediante una conexión Wi-Fi utilizando la placa ESP32.
+            La placa ESP32 es un microcontrolador de bajo costo con capacidades WiFi integradas, lo que la hace ideal para aplicaciones de IoT.
+            El presente trabajo demostrará cómo se puede controlar un dispositivo eléctrico de manera inalámbrica, sentando las bases para sistemas más complejos de domótica.
+        </p>
+
+        <h2>Objetivos:</h2>
+        <p><ul>
+            <li><strong>Objetivo general:</strong> Desarrollar un sistema que permita controlar el encendido y apagado de un foco a través de una conexión WiFi, utilizando una placa ESP32.</li>
+            <li><strong>Objetivos específicos:</strong>
+            <ul>
+                <li>Diseñar el circuito eléctrico que conecte el ESP32 con el foco, asegurando un aislamiento adecuado para manejar los voltajes involucrados.</li>
+                <li>Programar el microcontrolador para que actúe como un servidor web, permitiendo la interacción con el usuario a través de una interfaz web.</li>
+                <li>Implementar un protocolo de comunicación inalámbrica mediante WiFi para el control remoto del foco.</li>
+                <li>Probar el sistema en diferentes condiciones para verificar su funcionalidad y seguridad.</li>
+            </ul></li>
+        </ul></p>
+
+        <h2>Justificación:</h2>
+        <p>El control remoto de dispositivos eléctricos tiene aplicaciones en domótica, ahorro energético y accesibilidad. Este proyecto permite:
+            <ul>
+                <li>Automatización del Hogar: Controlar luces de forma remota, lo que puede contribuir a la eficiencia energética.</li>
+                <li>Accesibilidad: facilitar el control de luces para personas con capacidad reducida.</li>
+            </ul>
+        </p>
+
+        <h2>Metología:</h2>
+        <p><ol>
+            <li>Diseño del circuito: dibujamos el diagrama de conexiones utilizando un simulador online, en mi caso utilicé www.wokwi.com.</li>
+            <li>Realizamos la lista de materiales que debemos utilizar para llevar a cabo el proyecto</li>
+            <ul>
+                <li>2 mts de cable de 1.5mm</li>
+                <li>1 portalámparas</li>
+                <li>1 enchufe macho</li>
+                <li>1 foco</li>
+                <li>1 módulo relé </li>
+                <li>1 microcontrolador ESP32</li>
+                <li>Jumpers varios</li>
+            </ul>
+            <li>Realizamos las conexiones de acuerdo al diagrama ya planteado.</li>
+            <li>Realizamos el sketch que vamos a cargar al microcontrolador.</li>
+            <li>Verificamos las conexiones (WiFi, respuesta del servidor)</li>
+            <li>Probamos que cumpla con sus funciones (el foco debe prenderse y apagarse mediante WiFi)</li>
+        </ol></p>
+
+        <h2>Funcionalidad:</h2>
+        <p>Este proyecto convierte un foco común en un dispositivo inteligente que puede ser controlado de forma remota. Específicamente:
+            <ul>
+                <li>Transforma un foco normal en uno que se puede encender y apagar desde cualquier dispositivo con conexión WIFi (celular, tablet, computadora)</li>
+                <li>Crea un interruptor virtual accesible mediante una página web</li>
+                <li>Permite el control desde cualquier lugar dentro de la red local</li>
+                <li>Elimina la necesidad de accionar interruptores físicos manualmente</li>
+            </ul>
+        </p>
+
+        <h2>Funcionamiento:</h2>
+        <p><ol>
+            <li>Configuración inicial:</li>
+            <ul>
+                <li>El ESP32 se conecta al WiFi usando las credenciales proporcionadas</li>
+                <li>Obtiene una dirección IP local</li>
+            </ul>
+            <li>Servidor Web:</li>
+            <ul>
+                <li>El ESP32 inicia un servidor web en el puerto 80</li>
+                <li>Espera solicitudes de clientes (navegadores web)</li>
+            </ul>
+            <li>Interacción del usuario:</li>
+            <ul>
+                <li>Abrir algun navegador y escribir la IP proporcionada por el programa una vez que se realizó la carga del sketch a la placa</li>
+                <li>Se puede observar una página con dos botones, ENCENDER y APAGAR</li>
+            </ul>
+            <li>Proceso de control:</li>
+            <ul>
+                <li>Al hacer click en cualquiera de los botones, en mi caso pongo de ejemplo al hacer click en el botón ENCENDER, el navegador envía una solicitud a http://[IP-ESP32]/on</li>
+                <li>El ESP32 recibe esta solicitud y activa el pin GPIO (pone en HIGH), que en mi caso esta ubicado en el pin 14</li>
+                <li>El relé se activa y permite que la corriente fluya hacia el foco</li>
+                <li>El foco se enciende.</li>
+            </ul>
+        </ol></p>
+
+        <h2>Principios técnicos que hacen posible el proyecto:</h2>
+        <p>
+        <ol>
+            <li>Capacidades del ESP32:</li>
+            <ul>
+                <li>Tiene WiFi integrado: puede conectarse a redes inalámbricas como cualwuier dispositivo IoT</li>
+                <li>Es un servidor web: puede alojar páginas web simples y procesar solicitudes HTTP</li>
+                <li>Tiene GPIOs programables: puede controlar pines de entrada/salida digitalmente.</li>
+            </ul>
+            <li>Funcionamiento del relé:</li>
+            <ul>
+                <li>Principio electromagnético: cuando el ESP envía 5v al relé, éste activa un electroimán</li>
+                <li>Aislamiento galvánico: separa completamente el circuito de bajo voltaje (ESP32) del de alto voltaje (foco)</li>
+                <li>Conmutación: el relé actúa como un interruptor mecánico controlado eléctricamente</li>
+            </ul>
+            <li>Protocolo HTTP:</li>
+            <ul>
+                <li>Lenguaje universal: todos los navegadores entienden HTTP</li>
+                <li>Solicitud-Respuesta:</li>
+                <ul>
+                    <li>Cliente: “GET/on”</li>
+                    <li>Servidor: “200 OK + página HTML” </li>
+                </ul>
+                <li>Stateless: cada click es una solicitud independiente</li>
+            </ul>
+            <li>Programación embebida:</li>
+            <ul>
+                <li>Lógica de control: el codigo decide que hacer según la URL solicitada</li>
+                <li>Gestión de conexiones: Maneja múltiples clientes de forma secuencial</li>
+                <li>Persistencia: mantiene el estado del foco hasta recibir nueva instrucción.</li>
+            </ul>
+
+        </ol>
+        </p>
+    </section>
+
+
+    <section id="imagenes">
+        <h2>Imágenes del proceso:</h2>
+        <img src="Imágenes\imagenreferencia1.jpg" alt="Circuito1" width="400" height="300">
+        <p style="text-align: center;font-size: 15px;">Primera imagen de referencia tomada de la guía mostrada por el profesor en clases</p>
+        <br><br>
+
+        <img src="Imágenes\armadocircuito.jpg" alt="Circuito2" width="400" height="300">
+        <p style="text-align: center; font-size: 15px;">Circuito ya armado, listo para poner a prueba</p>
+        <br><br>
+
+        <video width="400" height="300" controls>
+            <source src="Imágenes\videopruebaled.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <p style="text-align: center;font-size: 15px;">Primer video de pruba con un led</p>
+
+        <video width="400" height="300" controls>
+            <source src="Imágenes\videofinal.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <p style="text-align: center;font-size: 15px;">Video final del proyecto, donde se puede observar el foco encendiéndose y apagándose mediante WiFi</p>
+    </section>
+
+    <section id="circuito">
+        <h3>Diagrama del circuito:</h3>
+        <img src="Imágenes\simulacion.jpg" alt="DiagramaCircuito" width="600" height="400">
+        <p style="text-align: center;font-size: 15px;">Diagrama del circuito realizado en el simulador Wokwi</p>
+
+        <h3>Código utilizado:</h3>
+        
+        <iframe src="Imágenes\codigoesp32.pdf" width="600" height="400"></iframe>
+        <p style="text-align: center;font-size: 15px;">Código utilizado para cargar en la placa ESP32</p>
+
+</body>
